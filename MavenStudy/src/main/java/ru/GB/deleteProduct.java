@@ -11,10 +11,10 @@ import java.time.Duration;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+public class deleteProduct {
 
-public class addProduct {
-    public static void main(String[] args)  {
-
+    public static void main(String[] args) throws InterruptedException {
+        //Предусловие: Добавить товар в корзину:
         System.setProperty("webdriver.http.factory", "jdk-http-client");
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
@@ -24,11 +24,9 @@ public class addProduct {
 //        options.addArguments("--headless");
 
         WebDriver webDriver = new ChromeDriver(options);
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        webDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         webDriver.get("https://www.colins.ru/");
-        WebDriverWait webDriverWait = new WebDriverWait(webDriver,Duration.ofSeconds(10));
-
-//Предусловие:
+        WebDriverWait webDriverWait = new WebDriverWait(webDriver,Duration.ofSeconds(3));
 // Аутентификация:
         webDriver.findElement(By.xpath("//img[@alt=\"user-icon\"]")).click();
         webDriver.findElement(By.xpath("//a[contains(text(),'Войти')]")).click();
@@ -55,6 +53,11 @@ public class addProduct {
         webDriver.findElement(By.xpath("//div[@class=\"product-detail-size-container\"]//select")).click();
         webDriver.findElement(By.xpath("//option[contains(text(),'M') or contains(text(),'S') or contains(text(),'L')]")).click();
         webDriver.findElement(By.xpath("//a[@id=\"addtocartbutton\"]")).click();
+
+// Удаление товара из корзины:
+        webDriver.findElement(By.xpath("//img[@alt=\"cart-icon\"]")).click();
+        webDriver.findElement(By.xpath("//span[contains(text(),'Удалить')]")).click();
+        webDriver.findElement(By.id("btnYes")).click();
 
         webDriver.quit();
 
