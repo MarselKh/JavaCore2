@@ -15,7 +15,7 @@ public class MyTest extends AbstractTestWebDriver {
 
     @Test
     @DisplayName("Авторизация на сайте")
-    void loginClient(){
+    void loginClientTest(){
         getWebdriver().findElement(By.xpath("//img[@alt=\"user-icon\"]")).click();
         getWebdriver().findElement(By.xpath("//a[contains(text(),'Войти')]")).click();
         getWebdriver().findElement(By.cssSelector("#ins-responsive-banner > #wrap-close-button-1454703513202 span")).click();
@@ -28,10 +28,10 @@ public class MyTest extends AbstractTestWebDriver {
 
     @Test
     @DisplayName("Добавление товара в корзину авторизованным пользователем")
-    void addProduct(){
+    void addProductTest(){
         WebDriverWait webDriverWait = new WebDriverWait(getWebdriver(), Duration.ofSeconds(10));
 //Предусловие - авторизация на сайте:
-       loginClient();
+       loginClientTest();
         //Поиск товара:
         getWebdriver().findElement(By.xpath("//input[@id=\"TxtSearchBox\"]")).sendKeys("рубашка");
         getWebdriver().findElement(By.xpath("//input[@id=\"searchengine\"]")).click();
@@ -57,10 +57,10 @@ public class MyTest extends AbstractTestWebDriver {
 
     @Test
     @DisplayName("Удаление товара из корзины авторизованным пользователем")
-    void deleteProduct () {
+    void deleteProductTest () {
 //        //Предусловие - авторизация на сайте:
 //        //Предусловие - добавление товара в корзину:
-        addProduct();
+        addProductTest();
         // Удаление товара из корзины:
         getWebdriver().findElement(By.xpath("//img[@alt=\"cart-icon\"]")).click();
         getWebdriver().findElement(By.xpath("//span[contains(text(),'Удалить')]")).click();
@@ -73,7 +73,7 @@ public class MyTest extends AbstractTestWebDriver {
 
     @Test
     @DisplayName("Поиск товара использую фильтр")
-    void useFilter () {
+    void useFilterTest () {
 
         getWebdriver().findElement(By.xpath("//*[@id=\"defaultmenu\"]//li/a[contains(text(), \"МУЖЧИНАМ\")]")).click();
         getWebdriver().findElement(By.cssSelector("#ins-responsive-banner > #wrap-close-button-1454703513202 span")).click();
@@ -88,13 +88,12 @@ public class MyTest extends AbstractTestWebDriver {
 
     @Test
     @DisplayName("Проверка меню кнопок иконки авторизованного пользоваеля ")
-    void clientIcon () {
+    void clientIconTest () {
         //Авторизация на сайте
-        loginClient();
+        loginClientTest();
 
         getWebdriver().findElement(By.xpath("//img[@alt=\"user-icon\"]")).click();
         getWebdriver().findElement(By.xpath("//ul[@class=\"customer-links-sub-dropdown\"]//a[contains(text(), \"Основные данные\")]")).click();
-//        trueXpath( "https://www.colins.ru/customer/info");
         equalsButtonUrlAssertions("https://www.colins.ru/customer/info", "Кнопка Основные данные");
 
         getWebdriver().findElement(By.xpath("//img[@alt=\"user-icon\"]")).click();
@@ -139,7 +138,7 @@ public class MyTest extends AbstractTestWebDriver {
 
     @Test
     @DisplayName("Авторизация на сайте не валидным пользователем")
-    void loginClientFalse () {
+    void loginClientFalseTest () {
         getWebdriver().findElement(By.xpath("//img[@alt=\"user-icon\"]")).click();
         getWebdriver().findElement(By.xpath("//a[contains(text(),'Войти')]")).click();
         getWebdriver().findElement(By.cssSelector("#ins-responsive-banner > #wrap-close-button-1454703513202 span")).click();
