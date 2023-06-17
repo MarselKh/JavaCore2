@@ -89,7 +89,7 @@ public class MyTest extends AbstractTestWebDriver {
     @Test
     @DisplayName("Проверка меню кнопок иконки авторизованного пользоваеля ")
     void clientIconTest () {
-        //Авторизация на сайте
+        //Предусловие - авторизация на сайте:
         loginClientTest();
 
         getWebdriver().findElement(By.xpath("//img[@alt=\"user-icon\"]")).click();
@@ -123,17 +123,6 @@ public class MyTest extends AbstractTestWebDriver {
         getWebdriver().findElement(By.xpath("//img[@alt=\"user-icon\"]")).click();
         getWebdriver().findElement(By.xpath("//ul[@class=\"customer-links-sub-dropdown\"]//a[@href=\"/logout\"]")).click();
         equalsButtonUrlAssertions("https://www.colins.ru/?logout=1", "Кнопка Выйти");
-    }
-
-    void equalsButtonUrlAssertions (String expectedURL, String str) {
-        String actualURL = getWebdriver().getCurrentUrl();
-        Assertions.assertEquals(expectedURL,actualURL, str);
-    }
-
-    void trueXpathAssertions (String str) {
-        webElement = getWebdriver().findElement(By.xpath(str));
-        boolean checkedXpath = webElement.isDisplayed();
-        Assertions.assertTrue(true, String.valueOf(checkedXpath));
     }
 
     @Test
